@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+    <style>
+        /* General Body Style */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8; /* Light gray background for contrast */
+        }
+
+        /* Header Style */
+        h1 {
+            color: #d4af37; /* Gold color for headers */
+            font-size: 2.5em; /* Larger font size for headers */
+            margin-bottom: 20px; /* Space below headers */
+        }
+
+        /* Navigation Links Style */
+        nav a {
+            text-decoration: none;
+            color: #d4af37; /* Gold color for links */
+            margin: 10px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b8860b; /* Darker gold on hover */
+        }
+
+        /* Cart Item Styles */
+        .cart-items {
+            max-width: 800px; /* Limit width for better layout */
+            margin: 0 auto; /* Center cart items */
+            padding: 20px; /* Padding around items */
+            background-color: #fff; /* White background for cart */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between;
+            border: 1px solid #d4af37; /* Gold border for cart items */
+            border-radius: 10px; /* Rounded corners */
+            padding: 15px; /* Padding for better spacing */
+            background-color: #fdfdfd; /* Slightly off-white for items */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        .cart-item:hover {
+            background-color: #f8f8f8; /* Light gray on hover */
+        }
+
+        .cart-item img {
+            margin-right: 15px;
+            border-radius: 5px; /* Rounded corners for images */
+            max-width: 80px; /* Fixed width for images */
+            height: auto;
+        }
+
+        /* Remove Button Style */
+        .remove-from-cart {
+            background-color: #f44336; /* Red for 'Remove' */
+            color: white;
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            padding: 5px 10px; /* Padding for button */
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .remove-from-cart:hover {
+            background-color: #da190b; /* Darker red on hover */
+        }
+
+        /* Total Cost Section */
+        #total-cost {
+            margin-top: 20px;
+            font-size: 1.5em; /* Larger font size */
+            color: #333; /* Dark color for total */
+        }
+
+        /* Checkout Button Style */
+        button {
+            background-color: #d4af37; /* Gold background color */
+            color: white;
+            border: none;
+            border-radius: 10px; /* More pronounced rounded corners */
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition */
+            font-size: 16px; /* Larger font size for buttons */
+        }
+
+        button:hover {
+            background-color: #b8860b; /* Darker gold on hover */
+        }
+
+        /* Back Button Style */
+        .back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Shopping Cart</h1>
+        <nav>
+            <a href="/men-apparel">Men's Apparel</a>
+            <a href="/women-apparel">Women's Apparel</a>
+            <a href="/cart">Cart</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Back Button -->
+        <a href="/home" style="text-decoration: none; padding: 10px;">Back to Home</a>
+
+        <div class="cart-items">
+            <% cartItems.forEach(function(item) { %>
+                <div class="cart-item">
+                    <img src="<%= item.image %>" alt="<%= item.name %>">
+                    <div>
+                        <h2 style="margin: 0; font-size: 1.5em; color: #333;"><%= item.name %></h2>
+                        <p style="margin: 0;">Price: $<span class="item-price"><%= item.price %></span></p>
+
+                        <!-- Quantity Selection -->
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label for="quantity_<%= item.cart_id %>">Quantity:</label>
+                            <input type="number" id="quantity_<%= item.cart_id %>" name="quantity" value="<%= item.quantity %>" min="1" class="quantity-input">
+                        </div>
+                    </div>
+
+                    <!-- Remove Button -->
+                    <form action="/remove-from-cart" method="POST" style="margin-left: 10px;">
+                        <input type="hidden" name="cart_id" value="<%= item.cart_id %>">
+                        <button type="submit" class="remove-from-cart">Remove</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+
+        <!-- Total Cost Section -->
+        <div id="total-cost">
+            Total Cost: $<span id="total-price">0.00</span>
+        </div>
+
+        <!-- Checkout Button -->
+        <form action="/checkout" method="POST" style="margin-top: 20px;">
+            <button type="submit">Checkout</button>
+        </form>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            // Function to update the total price
+            function updateTotal() {
+                let total = 0;
+                $('.cart-item').each(function() {
+                    const price = parseFloat($(this).find('.item-price').text());
+                    const quantity = parseInt($(this).find('.quantity-input').val());
+                    total += price * quantity; // Calculate total cost
+                });
+                $('#total-price').text(total.toFixed(2)); // Update total cost display
+            }
+
+            // Initial total price calculation
+            updateTotal();
+
+            // Update total price when quantity changes
+            $('.quantity-input').on('input', function() {
+                updateTotal();
+            });
+        });
+    </script>
+</body>
+</html>

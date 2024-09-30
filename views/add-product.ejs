@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Add Product</title>
+</head>
+<body>
+  <h1>Add New Product</h1>
+  <form action="/add-product" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
+    </div>
+    <div class="form-group">
+      <label for="productPrice">Product Price:</label>
+      <input type="text" id="productPrice" name="productPrice" required>
+    </div>
+    <div class="form-group">
+      <label for="productDescription">Product Description:</label>
+      <textarea id="productDescription" name="productDescription" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="productImage">Product Image:</label>
+      <input type="file" id="productImage" name="image" accept="image/*" required>
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select id="category" name="category" required>
+        <option value="men">Men's Apparel</option>
+        <option value="women">Women's Apparel</option>
+      </select>
+    </div>
+    <button type="submit">Add Product</button>
+  </form>
+  <a href="/home">Back to Home</a>
+</body>
+</html>

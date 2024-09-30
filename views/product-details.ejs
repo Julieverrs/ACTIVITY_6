@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.name %> - Product Details</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS -->
+</head>
+<body>
+    <header>
+        <h1><%= product.name %></h1>
+        <nav>
+            <a href="/men-apparel">Men's Apparel</a>
+            <a href="/women-apparel">Women's Apparel</a>
+            <a href="/cart">Cart</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Back Button to Home -->
+        <a href="/home" style="margin-bottom: 20px; display: inline-block;">Back to Home</a>
+
+        <div class="product-details">
+            <img src="<%= product.image %>" alt="<%= product.name %>" width="300"> <!-- Display product image -->
+            <h2>Price: $<%= product.price %></h2>
+            <p>Description: <%= product.description %></p>
+            <form action="/add-to-cart" method="POST">
+                <input type="hidden" name="product_id" value="<%= product.id %>">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,156 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8; /* Light gray background for contrast */
+}
+
+h1 {
+    color: #d4af37; /* Gold color for headers */
+    font-size: 2.5em; /* Larger font size for headers */
+    margin-bottom: 20px; /* Space below headers */
+}
+
+a {
+    text-decoration: none;
+    color: #d4af37; /* Gold color for links */
+    margin: 10px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #b8860b; /* Darker gold on hover */
+}
+
+div {
+    margin: 20px 0;
+    border: 1px solid #d4af37; /* Gold border for product sections */
+    border-radius: 10px; /* More pronounced rounded corners */
+    padding: 15px; /* Increased padding for better spacing */
+    background-color: #fff; /* White background for product boxes */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners for images */
+}
+
+button {
+    background-color: #d4af37; /* Gold background color */
+    color: white;
+    border: none;
+    border-radius: 10px; /* More pronounced rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px; /* Larger font size for buttons */
+}
+
+button:hover {
+    background-color: #b8860b; /* Darker gold on hover */
+}
+
+#suggestions {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    max-height: 150px;
+    overflow-y: auto;
+    width: calc(100% - 2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+/* Additional styles for buttons in various sections */
+button.add-to-cart {
+    background-color: #4CAF50; /* Green for 'Add to Cart' */
+}
+
+button.add-to-cart:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+button.remove-from-cart {
+    background-color: #f44336; /* Red for 'Remove' */
+}
+
+button.remove-from-cart:hover {
+    background-color: #da190b; /* Darker red on hover */
+}
+
+/* General Form Styles */
+form {
+    background-color: #fff; /* White background for form */
+    padding: 20px; /* Padding inside form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    margin: 20px auto; /* Center form horizontally */
+    max-width: 600px; /* Max width for form */
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+    text-align: left; /* Left align text for labels */
+}
+
+label {
+    display: block; /* Block level for labels */
+    margin-bottom: 5px; /* Space below labels */
+    color: #333; /* Dark color for labels */
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ddd; /* Light border for inputs */
+    border-radius: 5px; /* Rounded corners for inputs */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+textarea {
+    height: 100px; /* Fixed height for textarea */
+}
+
+button {
+    background-color: #d4af37; /* Gold background color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    cursor: pointer;
+    width: 100%; /* Full width for button */
+    font-size: 16px; /* Larger font size */
+}
+
+button:hover {
+    background-color: #b8860b; /* Darker gold on hover */
+}
+
+/* Back Link */
+a {
+    display: inline-block; /* Inline block for links */
+    margin-top: 15px; /* Space above link */
+    color: #d4af37; /* Gold color for link */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+a:hover {
+    color: #b8860b; /* Darker gold on hover */
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results for <%= query %></title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Include your CSS file -->
+</head>
+<body>
+    <h1>Search Results for: <%= query %></h1>
+    <div class="product-list">
+        <% if (products.length > 0) { %>
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                    <h2><%= product.name %></h2>
+                    <p>Price: $<%= product.price %></p>
+                    <p><%= product.description %></p>
+                    <a href="/product/<%= product.id %>">View Details</a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No products found matching your search.</p>
+        <% } %>
+    </div>
+    <a href="/">Back to Home</a>
+</body>
+</html>

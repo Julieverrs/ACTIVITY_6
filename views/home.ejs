@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Suggestions styles */
+        .suggestion-item {
+            padding: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Suggestions container style */
+        #suggestions {
+            display: none; 
+            position: absolute; 
+            background: white; 
+            border: 1px solid #ccc; 
+            max-height: 150px;
+            overflow-y: auto; 
+            z-index: 1000; 
+            width: calc(100% - 16px);
+            margin-top: 2px; 
+            border-radius: 4px; 
+        }
+
+        /* Image styles */
+        #center-image {
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            margin: 20px 0; /* Add space above and below the image */
+        }
+
+        #center-image img {
+            max-width: 100%; /* Make image responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Store</h1>
+    
+    <!-- Search Bar Container -->
+    <div style="position: relative; margin-bottom: 20px;">
+        <input type="text" id="search" placeholder="Search for products..." autocomplete="off" style="width: 100%; padding: 8px;">
+        <div id="suggestions" style="display: none;"></div>
+    </div>
+    
+    <!-- Navigation Links -->
+    <nav>
+        <a href="/men-apparel">Men's Apparel</a>
+        <a href="/women-apparel">Women's Apparel</a>
+        <a href="/cart">Cart</a>
+        <a href="/profile">Profile</a>
+        <a href="/add-product">Add Product</a>
+    </nav>
+
+    <!-- Center Image -->
+    <img src="/images/Screenshot 2024-09-29 124021.png" alt="Welcome Image" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
+    
+    <script>
+        $(document).ready(function() {
+            $('#search').on('input', function() {
+                let query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: '/search-suggestions',
+                        method: 'GET',
+                        data: { query: query },
+                        success: function(data) {
+                            $('#suggestions').empty().show();
+                            if (data.length > 0) {
+                                data.forEach(function(product) {
+                                    $('#suggestions').append('<div class="suggestion-item" data-id="' + product.id + '">' + product.name + '</div>');
+                                });
+                            } else {
+                                $('#suggestions').hide();
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestions').hide();
+                }
+            });
+
+            // Handle suggestion click
+            $(document).on('click', '.suggestion-item', function() {
+                const productId = $(this).data('id');
+                window.location.href = '/product/' + productId;
+            });
+
+            // Hide suggestions when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#search').length) {
+                    $('#suggestions').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
